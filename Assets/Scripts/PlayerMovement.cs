@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public float moveSpeed, jumpPower, dragForce;
+    public float moveSpeed, jumpPower;
     private float horizontal;
     private bool isGrounded;
 
@@ -24,11 +24,10 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
         }
-    }
 
-    void FixedUpdate()
-    {
-        rb.AddForce(transform.right * horizontal * moveSpeed);
+        rb.drag = isGrounded ? 2f : 0.2f;
+        Vector2 forceDirection = Quaternion.Euler(0, 0, -90) * transform.up;
+        rb.AddForce(forceDirection * horizontal * moveSpeed);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -39,19 +38,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Planet"))
-        {
-            rb.drag = dragForce;
-        }
-    }
-
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Planet"))
         {
-            rb.drag = 0.2f;
             isGrounded = false;
         }
     }

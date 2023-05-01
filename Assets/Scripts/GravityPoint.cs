@@ -27,18 +27,20 @@ public class GravityPoint : MonoBehaviour
         foreach (Collider2D planet in planets)
         {
             float distance = Vector3.Distance(planet.transform.position, transform.position);
-            if (distance < minDistance)
+            float planetRadius = planet.GetComponent<CircleCollider2D>().radius * planet.transform.localScale.x;
+            float surfaceDistance = Mathf.Max(0, distance - planetRadius);
+
+            if (surfaceDistance < minDistance)
             {
-                minDistance = distance;
+                minDistance = surfaceDistance;
                 closestPlanet = planet;
             }
         }
-        Debug.Log(closestPlanet);
         if (closestPlanet != null)
         {
             Vector3 dir = (closestPlanet.transform.position - transform.position) * gravityScale;
             GetComponent<Rigidbody2D>().AddForce(dir);
-            transform.up = Vector3.MoveTowards(transform.up, -dir, gravityScale * Time.deltaTime);
+            transform.up = -dir;
         }
     }
 }
