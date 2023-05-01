@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.collider.CompareTag("Planet"))
         {
-            rb.drag = 0.1f;
+            rb.drag = 0.2f;
             isGrounded = false;
         }
     }
