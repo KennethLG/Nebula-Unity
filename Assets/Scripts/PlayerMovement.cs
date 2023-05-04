@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
     public float moveSpeed = 15f;
     public float jumpPower = 30;
     private float horizontal;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Movement();
         UpdateSpriteFlip();
+        animator.SetBool("isRunning", horizontal != 0f);
     }
 
     private void Movement()
