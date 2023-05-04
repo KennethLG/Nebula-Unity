@@ -20,24 +20,28 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Movement();
+        UpdateSpriteFlip();
+    }
 
+    private void Movement()
+    {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
         }
 
         horizontal = Input.GetAxisRaw("Horizontal");
-        rb.drag = isGrounded ? 4f : 0.2f;
+        rb.drag = isGrounded ? 2f : 0.2f;
         Vector2 forceDirection = Quaternion.Euler(0, 0, -90) * transform.up;
         rb.AddForce(forceDirection * horizontal * moveSpeed);
+    }
 
-        if (horizontal == -1f)
+    private void UpdateSpriteFlip()
+    {
+        if (horizontal != 0)
         {
-            spriteRenderer.flipX = true;
-        }
-        else if (horizontal == 1f)
-        {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = Mathf.Sign(horizontal) == -1f;
         }
     }
 
