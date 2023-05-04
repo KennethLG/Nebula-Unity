@@ -241,7 +241,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.5
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -262,8 +262,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0032601953, y: -0.01609516}
-  m_Size: {x: 0.090030335, y: 0.20780973}
+  m_Offset: {x: 0.0051864386, y: -0.023220241}
+  m_Size: {x: 0.09398289, y: 0.19751231}
   m_Direction: 0
 --- !u!212 &646327198
 SpriteRenderer:
@@ -344,9 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478452aed05abe342bb0b3832cd7eb41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 40
-  jumpPower: 20
-  dragForce: 1
+  moveSpeed: 10
+  jumpPower: 30
 --- !u!114 &646327201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 5
-  detectionRadius: 1000
+  detectionRadius: 50
 --- !u!1 &1304651980
 GameObject:
   m_ObjectHideFlags: 0

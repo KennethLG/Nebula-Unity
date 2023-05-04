@@ -5,29 +5,40 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public float moveSpeed, jumpPower;
+    private SpriteRenderer spriteRenderer;
+    public float moveSpeed = 15f;
+    public float jumpPower = 30;
     private float horizontal;
     private bool isGrounded;
-
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
         }
 
-        rb.drag = isGrounded ? 2f : 0.2f;
+        horizontal = Input.GetAxisRaw("Horizontal");
+        rb.drag = isGrounded ? 4f : 0.2f;
         Vector2 forceDirection = Quaternion.Euler(0, 0, -90) * transform.up;
         rb.AddForce(forceDirection * horizontal * moveSpeed);
+
+        if (horizontal == -1f)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (horizontal == 1f)
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

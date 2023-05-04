@@ -40,7 +40,7 @@ public class GravityPoint : MonoBehaviour
         {
             Vector3 dir = (closestPlanet.transform.position - transform.position) * gravityScale;
             GetComponent<Rigidbody2D>().AddForce(dir);
-            transform.up = -dir;
+            transform.rotation = Quaternion.FromToRotation(transform.up, -dir) * transform.rotation;
         }
     }
 }
